@@ -13,7 +13,9 @@ export class AuthService {
 
 	constructor() {
 		// We can change the constructor if we choose to shift the backend service accordingly || Creating a modular code here
-		this.client.setEndpoint(conf.appwriteUrl).setProject(conf.appwriteProjectId);
+		this.client
+			.setEndpoint(conf.appwriteUrl)
+			.setProject(conf.appwriteProjectId);
 
 		this.account = new Account(this.client);
 	}
@@ -49,31 +51,28 @@ export class AuthService {
 		}
 	}
 
-    async getCurrentUser(){
-        try {
-            return await this.account.get()
-        } catch (error) {
-            console.log("Appwrite service :: getCurrentUser :: error", error) // Second option if we don't wanna throw the error || another way to handel an error
-        }
+	async getCurrentUser() {
+		try {
+			return await this.account.get();
+		} catch (error) {
+			console.log("Appwrite service :: getCurrentUser :: error", error); // Second option if we don't wanna throw the error || another way to handel an error
+		}
 
-        return null; // If we couldn't reach to the account or any error happens on the way
-    }
+		return null; // If we couldn't reach to the account or any error happens on the way
+	}
 
-    async logout(){
-        try {
-            return await this.account.deleteSession(
-                'current'
-            )
-        } catch (error) {
-            console.log("Appwrite service :: logout :: error", error)
-        }
-    }
+	async logout() {
+		try {
+			return await this.account.deleteSession("current");
+		} catch (error) {
+			console.log("Appwrite service :: logout :: error", error);
+		}
+	}
 }
 
 const authService = new AuthService();
 
 export default authService;
-
 
 // This file is now can be used for all the frontend app using Appwrite with above services.
 // If we change the backend service, we just need to change this configuration in methods without changing the parameters we use. Other files will be independent of the backend.
