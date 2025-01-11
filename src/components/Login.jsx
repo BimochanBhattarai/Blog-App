@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import {login as authLogin} from '../store/authSlice'
 import {Button, Input, Logo} from './index'
@@ -10,6 +10,7 @@ const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {register, handelSubmit} = useForm()
+    const [error, setError] = useState("")
   return (
     <div>Login component</div>
   )
